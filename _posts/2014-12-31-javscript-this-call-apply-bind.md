@@ -16,65 +16,64 @@ tags: []
 ##Self
 
 아래는 흔히 하는 실수와, 변수 `self` 를 통해서 해결하는 방법이다.
-```javascript
-function Shape() {
-  this.x = 0;
-  this.y = 0;
-}
 
-Shape.prototype = {
-  move: function(x, y) {
-    this.x += x;
-    this.y += y;
-    
-    function checkBounds() {
-      if (this.x > 100) {
-        console.error('Warning: Shape out of bounds');
-      }
+    function Shape() {
+        this.x = 0;
+        this.y = 0;
     }
 
-    checkBounds();
-  }
-};
+    Shape.prototype = {
+      move: function(x, y) {
+        this.x += x;
+        this.y += y;
+        
+        function checkBounds() {
+          if (this.x > 100) {
+            console.error('Warning: Shape out of bounds');
+          }
+        }
+    
+        checkBounds();
+      }
+    };
+    
+    var shape = new Shape();
+    shape.move(101, 1);
 
-var shape = new Shape();
-shape.move(101, 1);
-```
 
 `console.error` 가 호출되지 않는 이유는, `checkBounds` Function 은 `Shape.move` property 내에서 정의되어 있지만, 그 자체가 Object 의 메소드는 아니기 때문이다.
 
-```
-Shape.prototype = {
-  move: function(x, y) {
-    var self = this;
 
-    this.x += x;
-    this.y += y;
+    Shape.prototype = {
+      move: function(x, y) {
+        var self = this;
     
-    function checkBounds() {
-      if (self.x > 100) {
-        console.error('Warning: Shape out of bounds');
+        this.x += x;
+        this.y += y;
+        
+        function checkBounds() {
+          if (self.x > 100) {
+            console.error('Warning: Shape out of bounds');
+          }
+        }
+    
+        checkBounds();
       }
-    }
+    };
 
-    checkBounds();
-  }
-};
-```
 
 아무리 Object 에 붙어있는 Method 라도, 그 자체로 따로 변수로 저장하면 단순한 Function 이다. 무슨말인고 하니
 
-```
-this.x = 9; 
-var module = {
-  x: 81,
-  getX: function() { return this.x; }
-};
+    this.x = 9; 
+    var module = {
+      x: 81,
+      getX: function() { return this.x; }
+    };
+    
+    module.getX(); // 81
+    
+    var getX = module.getX;
+    getX(); // 9, because in this case, "this" refers to the global object
 
-module.getX(); // 81
-
-var getX = module.getX;
-getX(); // 9, because in this case, "this" refers to the global object
-```
 
 `getX` 는 단순한 Function 이다. `new Contsructor` 로 `Instance` 를 만들고, `Instance.method()` 와 같이 호출하거나, `Object.method()` 처럼 호출되는 것이 아니면 해당 함수는 전역 컨텍스트에서 실행되므로 `this` 도 `global` 이거나 `window` 일거다. 

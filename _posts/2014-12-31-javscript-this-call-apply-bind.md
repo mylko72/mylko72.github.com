@@ -7,11 +7,13 @@ tags: [this,call,apply,bind]
 ---
 {% include JB/setup %}
 
+[출처 http://language.is/165](http://language.is/165)
+
 ##Method, Function
 
-먼저 메소드와 함수의 차이에 대해서 간단히 알아보자. ES5 Spec 에 의하면 메소드는 Object 에 붙어있는 Function 이다. new 로 Object 를 생성하고 이 오브젝트의 Method 내에서 this 는 해당 오브젝트의 인스턴스를 가리킨다. (자바스크립트에서는 클래스가 따로 없으므로 오브젝트라 부르는 것 같다.). 반면 Method 가 아니라 Function 내부에서 this 는 window, Node.js 라면 global 이다. 그리고 strict mode 라면 Function 내부에서 this 는 undefined 다.
+먼저 메소드와 함수의 차이에 대해서 간단히 알아보자. ES5 Spec 에 의하면 메소드는 `Object` 에 붙어있는 `Function` 이다. `new` 로 `Object` 를 생성하고 이 오브젝트의 Method 내에서 `this` 는 해당 오브젝트의 인스턴스를 가리킨다. (자바스크립트에서는 클래스가 따로 없으므로 오브젝트라 부르는 것 같다.). 반면 Method 가 아니라 Function 내부에서 `this` 는 `window`, Node.js 라면 `global` 이다. 그리고 strict mode 라면 Function 내부에서 `this` 는 `undefined` 다.
 
-요약하자면 아무데에도 붙어있지 않고 홀로 정의되어 있는 것은 함수요, 오브젝트의 프로퍼티로 정의된 함수는 메소드이며,  함수 내에서 this 는 global, window 또는 undefined 가 될 수 있다. 반면 오브젝트의 메소드 내에서 this 는 해당 오브젝트의 인스턴스를 가리킨다. 
+요약하자면 아무데에도 붙어있지 않고 홀로 정의되어 있는 것은 함수요, 오브젝트의 프로퍼티로 정의된 함수는 메소드이며,  함수 내에서 `this` 는 `global`, `window` 또는 `undefined` 가 될 수 있다. 반면 오브젝트의 메소드 내에서 `this` 는 해당 오브젝트의 인스턴스를 가리킨다. 
 
 ##Self
 
@@ -156,14 +158,14 @@ jQuery 가 내부적으로 콜백 내에서 사용하는 `this` 가 DOM 객체�
     
 ##bind : default parameters
 
-bind() 를 이용하면, default parameters 를 가진 함수를 만들 수 있다. 그 전에 잠깐 이후에 사용할 Array.prototype.slice 에 대해 간단히 살펴보자.
+`bind()` 를 이용하면, default parameters 를 가진 함수를 만들 수 있다. 그 전에 잠깐 이후에 사용할 `Array.prototype.slice` 에 대해 간단히 살펴보자.
 
     var arr = [1, 2, 3];
     arr.slice() // [1, 2, 3]
     arr.slice(1) // [2, 3]
     arr.slice(2) // [3]
     
-기본적으로 slice 는 인자가 아무것도 없으면, this 를 배열로 만들어 돌려준다. 그래서 call 을 이용하면 이런 활용이 가능하다.
+기본적으로 `slice`는 인자가 아무것도 없으면, `this` 를 배열로 만들어 돌려준다. 그래서 `call` 을 이용하면 이런 활용이 가능하다.
 
     function list() {
       return Array.prototype.slice.call(arguments);
@@ -171,7 +173,7 @@ bind() 를 이용하면, default parameters 를 가진 함수를 만들 수 있�
 
     list(1, 2, 3) // [1 ,2 3]
     
-그리고 bind 를 이용하면, 이렇게 default parameter 를 가진 함수를 만들 수 있다.
+그리고 `bind` 를 이용하면, 이렇게 `default parameter` 를 가진 함수를 만들 수 있다.
 
     function list() {
       return Array.prototype.slice.call(arguments);
@@ -187,7 +189,7 @@ bind() 를 이용하면, default parameters 를 가진 함수를 만들 수 있�
     
 ##bind : setTimeout
 
-setTimeout 의 callback 의 this 는 전역 컨텍스트에서 사용되므로 window 또는 global(Node.js) 이다. 따라서 setTimeout 의 callback 으로 오브젝트의 메소드를 주고, 그 메소드 내에서 오브젝트의 인스턴스를 this 로 참조하려면, bind가 꼭 필요하다.
+`setTimeout` 의 callback 의 `this` 는 전역 컨텍스트에서 사용되므로 `window` 또는 `global`(Node.js) 이다. 따라서 `setTimeout` 의 callback 으로 오브젝트의 메소드를 주고, 그 메소드 내에서 오브젝트의 인스턴스를 `this` 로 참조하려면, `bind`가 꼭 필요하다.
 
     function LateBloomer() {
       this.petalCount = Math.ceil( Math.random() * 12 ) + 1;
@@ -203,7 +205,7 @@ setTimeout 의 callback 의 this 는 전역 컨텍스트에서 사용되므로 w
                   ' + this.petalCount + ' petals!');
     };
     
-만약 bind() 가 없다면, declare() 는 this.petalCount 를 얻지 못해 undefined 가 출력된다.
+만약 `bind()` 가 없다면, declare() 는 this.petalCount 를 얻지 못해 `undefined` 가 출력된다.
 
       ...
       ...

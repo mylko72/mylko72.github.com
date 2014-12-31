@@ -27,7 +27,6 @@ Shape.prototype = {
   move: function(x, y) {
     this.x += x;
     this.y += y;
-
     function checkBounds() {
       if (this.x > 100) {
         console.error('Warning: Shape out of bounds');
@@ -51,7 +50,6 @@ Shape.prototype = {
 
     this.x += x;
     this.y += y;
-
     function checkBounds() {
       if (self.x > 100) {
         console.error('Warning: Shape out of bounds');

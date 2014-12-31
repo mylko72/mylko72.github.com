@@ -16,8 +16,7 @@ tags: []
 ##Self
 
 아래는 흔히 하는 실수와, 변수 `self` 를 통해서 해결하는 방법이다.
-
-{% capture text %}...
+```javascript
 function Shape() {
   this.x = 0;
   this.y = 0;
@@ -40,7 +39,7 @@ Shape.prototype = {
 
 var shape = new Shape();
 shape.move(101, 1);
-...{% endcapture %}
+```
 
 `console.error` 가 호출되지 않는 이유는, `checkBounds` Function 은 `Shape.move` property 내에서 정의되어 있지만, 그 자체가 Object 의 메소드는 아니기 때문이다.
 

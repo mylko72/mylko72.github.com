@@ -1,9 +1,5 @@
 <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
-</div>
-
-<div class="row post-full">
-  <div class="col-xs-12">
   {% unless page.categories == empty %}
     <ul class="tag_box inline">
       <li><i class="glyphicon glyphicon-open"></i></li>
@@ -19,7 +15,10 @@
       {% include JB/tags_list %}
     </ul>
   {% endunless %}  
-  
+</div>
+
+<div class="row post-full">
+  <div class="col-xs-12">
     <div class="date">
       <span>{{ page.date | date_to_long_string }}</span>
     </div>

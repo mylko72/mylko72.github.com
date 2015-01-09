@@ -13,4 +13,5 @@ jQuery와 같은 3rd-party Library를 사용할 경우 jQuery의 이벤트 핸�
 $apply()를 호출함으로써 angular context 내부로 접근하게 하여 양방향 데이터 바인딩이 가능해진다.
 $apply()는 3rd-party Library를 이용해 데이터바인딩을 구현하기 위한 함수로 순수 angularJS내에서 $apply()를 사용하면 동작하지 않는다.
 
+
 [예제보기](http://embed.plnkr.co/lHt8gZvTTTLdydliWH2X/preview)
